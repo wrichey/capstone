@@ -1,0 +1,30 @@
+#!/bin/bash
+# Data Pipeline
+#run in terminal with “./cell_pipeline.txt”
+echo “Running Data Pipeline”
+
+#  removes existing images and begins replacing them
+#rm -rf cell_image_folder
+
+
+
+#  make images
+#  produces (overwrites) automated_annotations csv file
+echo “Data Augmentation”
+python cell_data_augmentation.py
+
+
+#  learn features
+#  output: feature vector matrix npy file
+#	    filename matrix npy file
+#  both matrices are in the same order names[x] is the name of feature_vector[x]
+echo “Feature Extraction”  
+python cell_feature_extraction.py
+
+
+#  runs SVM on features
+#    hold different image set as test case for each iteration
+#    run multiple kernels
+#    outputs results as csv files
+echo “Running SVM”
+python model1.py
